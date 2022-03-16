@@ -17,6 +17,7 @@ import {
 } from "../api";
 import { makeImagePath } from "../utils";
 import DetailBox from "./DetailBox";
+import Loading from "./Loading";
 
 const Wrapper = styled.div`
   background-color: black;
@@ -383,7 +384,7 @@ function Tv() {
   return (
     <Wrapper>
       {isLoading ? (
-        <Loader>로딩중...</Loader>
+        <Loading />
       ) : (
         <>
           <Banner

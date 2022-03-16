@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { getGenre, getSearch, IGenre, IGetContentResult } from "../api";
 import { makeImagePath } from "../utils";
+import Loading from "./Loading";
 
 const Wrapper = styled.div`
   position: relative;
@@ -191,7 +192,7 @@ function Search() {
   return (
     <Wrapper>
       {isLoading ? (
-        <Loader>Loading...</Loader>
+        <Loading />
       ) : (
         <>
           <RelatedSearchWrap>

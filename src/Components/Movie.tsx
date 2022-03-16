@@ -17,6 +17,7 @@ import {
 } from "../api";
 import { makeImagePath } from "../utils";
 import DetailBox from "./DetailBox";
+import Loading from "./Loading";
 
 /* 전체 */
 const Wrapper = styled.div`
@@ -395,7 +396,7 @@ function Movie() {
   return (
     <Wrapper>
       {isLoading ? (
-        <Loader>Loading...</Loader>
+        <Loading />
       ) : (
         <>
           <Banner bgphoto={makeImagePath(now?.results[0].backdrop_path || "")}>

@@ -16,7 +16,7 @@ const Overlay = styled(motion.div)`
 `;
 
 const BigList = styled(motion.div)`
-  position: absolute;
+  position: fixed;
   max-width: 900px;
   width: 90%;
   left: 0;

@@ -18,6 +18,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { getDay, getGenre, getWeek, IGenre, IGetContentResult } from "../api";
 import DetailBox from "../Components/DetailBox";
+import Loading from "../Components/Loading";
 import { makeImagePath } from "../utils";
 
 const Wrapper = styled.div`
@@ -387,7 +388,7 @@ function Home() {
   return (
     <Wrapper>
       {isLoading ? (
-        <Loader>Loading...</Loader>
+        <Loading />
       ) : (
         <>
           {/* 배너 */}
