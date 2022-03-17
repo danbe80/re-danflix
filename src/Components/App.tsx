@@ -17,7 +17,15 @@ function App() {
       setInit(true);
     });
   }, []);
-  return <>{init ? <AppRouter isLoggedIn={isLoggendIn} /> : <Loading />}</>;
+  return (
+    <>
+      {init ? (
+        <AppRouter isLoggedIn={isLoggendIn} />
+      ) : (
+        <Loading page={"login"} />
+      )}
+    </>
+  );
 }
 
 export default App;

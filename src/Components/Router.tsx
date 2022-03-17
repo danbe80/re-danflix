@@ -5,6 +5,7 @@ import Profile from "../Routes/Profile";
 import Header from "./Header/Header";
 import HeaderSign from "./Header/HeaderSign";
 import Movie from "./Movie";
+import Search from "./Search";
 import SignIn from "./SignIn";
 import Tv from "./Tv";
 
@@ -29,6 +30,7 @@ function AppRouter({ isLoggedIn }: ILog) {
               <Route path=":tvId" element={<Tv />} />
             </Route>
             <Route path="/profile" element={<Profile />} />
+            <Route path="/search" element={<Search />} />
           </>
         ) : (
           <>

@@ -1,33 +1,57 @@
-import { AnimatePresence, motion, useViewportScroll } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { getGenre, getSearch, IGenre, IGetContentResult } from "../api";
 import { makeImagePath } from "../utils";
+import DetailBox from "./DetailBox";
 import Loading from "./Loading";
 
 const Wrapper = styled.div`
   position: relative;
-  top: 100px;
-  overflow: hidden;
-  padding-bottom: 200px;
+  padding-top: 100px;
+  overflow-x: hidden;
+  height: 100vh;
 `;
-const Loader = styled.div``;
 const RelatedSearchWrap = styled.div`
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  position: relative;
   font-size: 14px;
-  padding: 60px;
-  overflow-wrap: break-word;
+  padding: 0 60px;
   span {
+    margin-left: 5px;
+    color: #a4b0be;
+  }
+  @media (max-width: ${(props) => props.theme.size.mobileL}) {
+    padding: 0 40px;
+    font-size: 12px;
+  }
+  @media (max-width: ${(props) => props.theme.size.mobile}) {
+    padding: 0 20px;
   }
 `;
 const RelatedSearch = styled.ul`
+  width: 100%;
   display: flex;
+  margin: 10px 0 30px 0;
+  color: ${(props) => props.theme.white.darker};
+  @media (max-width: ${(props) => props.theme.size.tablet}) {
+    flex-wrap: wrap;
+  }
+  @media (max-width: ${(props) => props.theme.size.mobile}) {
+    font-size: 10px;
+  }
 `;
 const SearchItem = styled.li`
-  margin: 0 5px;
+  padding: 2px 5px;
   cursor: pointer;
+  &:not(:last-child) {
+    border-right: 1px solid ${(props) => props.theme.white.darker};
+  }
   &:hover {
     color: ${(props) => props.theme.red};
   }
@@ -37,6 +61,14 @@ const SearchWrap = styled.div`
   grid-template-columns: repeat(6, 1fr);
   gap: 10px;
   padding: 0 60px;
+  @media (max-width: ${(props) => props.theme.size.mobileL}) {
+    grid-template-columns: repeat(4, 1fr);
+    padding: 0 40px;
+  }
+  @media (max-width: ${(props) => props.theme.size.mobile}) {
+    grid-template-columns: repeat(3, 1fr);
+    padding: 0 20px;
+  }
 `;
 const Box = styled(motion.div)<{ bgphoto: string }>`
   background-color: ${(props) => props.theme.white.lighter};
@@ -57,81 +89,6 @@ const Info = styled(motion.div)`
   font-size: 14px;
 `;
 
-const Overlay = styled(motion.div)`
-  position: fixed;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  opacity: 0;
-`;
-const BigList = styled(motion.div)`
-  position: absolute;
-  width: 50vw;
-  left: 0;
-  right: 0;
-  margin: 0 auto;
-  padding-bottom: 100px;
-  border-radius: 15px;
-  background-color: ${(props) => props.theme.black.darker};
-`;
-const XBtn = styled(motion.div)`
-  position: absolute;
-  right: 15px;
-  top: 10px;
-  background-color: ${(props) => props.theme.black.darker};
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  display: flex;
-  cursor: pointer;
-  svg {
-    margin: auto;
-  }
-`;
-const BigCover = styled.div`
-  width: 100%;
-  background-size: cover;
-  background-position: center center;
-  height: 400px;
-  border-radius: 15px 15px 0 0;
-`;
-const BigTitle = styled.h3`
-  color: ${(props) => props.theme.white.lighter};
-  padding: 20px;
-  font-size: 30px;
-  position: relative;
-  top: -120px;
-  letter-spacing: -2px;
-`;
-const BigMovieInfo = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
-  top: -50px;
-`;
-const BigGenres = styled.ul`
-  display: flex;
-  padding: 0 20px;
-  font-weight: bold;
-  li {
-    &:not(:last-child) {
-      margin-right: 10px;
-    }
-  }
-`;
-
-const BigReleaseDate = styled.span`
-  padding: 0 20px;
-`;
-const BigOverview = styled.p`
-  position: relative;
-  top: 0px;
-  padding: 20px;
-  line-height: 30px;
-  color: ${(props) => props.theme.white.lighter};
-`;
 const boxVariants = {
   normal: {
     scale: 1,
@@ -167,10 +124,10 @@ function Search() {
   const onBoxClicked = (listId: number) => {
     navigation(`/search?keyword=${keyword}&sid=${listId}`);
   };
-  const onOverlayClick = () => navigation(`/search?keyword=${keyword}`);
-  const { scrollY } = useViewportScroll();
-  const clickedList =
-    listId && data?.results.find((list) => list.id === +listId);
+  const clickedList = listId
+    ? data?.results.find((list) => list.id === +listId)
+    : null;
+
   const { data: genre } = useQuery<IGenre>("genres", getGenre);
   const listGenres =
     listId && data?.results.find((list) => list.id === +listId)?.genre_ids;
@@ -182,6 +139,9 @@ function Search() {
         gen.id === id ? genObj.push(gen.name) : null
       )
     );
+  const onSearch = (list: any) => {
+    navigation(`/search?keyword=${list.target.innerText}`);
+  };
   // 홈으로 가서 검색하면 빠르게 검색이 가능함 하지만 검색한 후 다시 검색하면 굉장히 느린 것을 알 수 있음
   // 연관 검색어 중복 제거
   /* const relatedKeyArr = data?.results.map((key) => key.name || key.title);
@@ -199,7 +159,13 @@ function Search() {
             <span>다음과 관련된 콘텐츠:</span>
             <RelatedSearch>
               {data?.results.slice(0, 5).map((list) => (
-                <SearchItem>{list.name || list.title}</SearchItem>
+                <SearchItem
+                  onClick={onSearch}
+                  value={list.name || list.title}
+                  key={list.id}
+                >
+                  {list.name || list.title}
+                </SearchItem>
               ))}
             </RelatedSearch>
           </RelatedSearchWrap>
@@ -228,55 +194,12 @@ function Search() {
       <AnimatePresence>
         {listId ? (
           <>
-            <Overlay
-              onClick={onOverlayClick}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-            >
-              <BigList
-                style={{ top: scrollY.get() + 100 }}
-                layoutId={listId + "serach"}
-              >
-                {clickedList && (
-                  <>
-                    <XBtn onClick={onOverlayClick}>
-                      <svg
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M2.29297 3.70706L10.5859 12L2.29297 20.2928L3.70718 21.7071L12.0001 13.4142L20.293 21.7071L21.7072 20.2928L13.4143 12L21.7072 3.70706L20.293 2.29285L12.0001 10.5857L3.70718 2.29285L2.29297 3.70706Z"
-                          fill="currentColor"
-                        />
-                      </svg>
-                    </XBtn>
-                    <BigCover
-                      style={{
-                        backgroundImage: `linear-gradient(to top, #181818, transparent), url(${makeImagePath(
-                          clickedList.backdrop_path || clickedList.poster_path,
-                          "w500"
-                        )})`,
-                      }}
-                    />
-                    <BigTitle>{clickedList.title || clickedList.name}</BigTitle>
-                    <BigMovieInfo>
-                      <BigGenres>
-                        {genObj.map((genre, i) => (
-                          <li key={i}>{genre}</li>
-                        ))}
-                      </BigGenres>
-                      <BigReleaseDate>
-                        {clickedList.release_date}
-                      </BigReleaseDate>
-                    </BigMovieInfo>
-                    <BigOverview>{clickedList.overview}</BigOverview>
-                  </>
-                )}
-              </BigList>
-            </Overlay>
+            <DetailBox
+              contentId={listId}
+              clickedContent={clickedList}
+              genObj={genObj}
+              content={`/search?keyword=${keyword}`}
+            />
           </>
         ) : null}
       </AnimatePresence>

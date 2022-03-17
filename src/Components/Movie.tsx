@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   BsCaretRightFill,
   BsChevronCompactLeft,
@@ -23,14 +23,6 @@ import Loading from "./Loading";
 const Wrapper = styled.div`
   background-color: ${(props) => props.theme.black.dark};
   overflow: hidden;
-`;
-
-/* 로딩 */
-const Loader = styled.div`
-  height: 20vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 `;
 
 /* 홈 배너 */
@@ -283,6 +275,7 @@ let offset = 6;
 const content = "/movies";
 
 function Movie() {
+  console.log("랜더링");
   // 현재 반영 중 영화 api  useQuery(queryKey, queryFn, options)
   const { data: now, isLoading } = useQuery<IGetContentResult>(
     ["movies", "playing"],

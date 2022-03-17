@@ -8,7 +8,7 @@ export const theme:DefaultTheme = {
     lighter: "#2F2F2F",
   },
   white: {
-    darker: "#e5e5e5",
+    darker: "#dfe4ea",
     lighter: "#fff",
   },
   // 반응형 적용

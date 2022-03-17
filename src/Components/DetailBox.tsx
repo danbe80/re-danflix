@@ -12,11 +12,11 @@ const Overlay = styled(motion.div)`
   height: 100%;
   background-color: rgba(0, 0, 0, 0.7);
   opacity: 0;
-  z-index: 2;
+  z-index: 11;
 `;
 
 const BigList = styled(motion.div)`
-  position: fixed;
+  position: absolute;
   max-width: 900px;
   width: 90%;
   left: 0;
@@ -25,7 +25,7 @@ const BigList = styled(motion.div)`
   padding-bottom: 100px;
   border-radius: 15px;
   background-color: ${(props) => props.theme.black.darker};
-  z-index: 10;
+  z-index: 11;
 `;
 const XBtn = styled(motion.div)`
   position: absolute;
@@ -159,7 +159,7 @@ function DetailBox({ contentId, clickedContent, genObj, content }: IDetail) {
             <BigCover
               style={{
                 backgroundImage: `linear-gradient(to top, #181818, transparent), url(${makeImagePath(
-                  clickedContent.backdrop_path,
+                  clickedContent.backdrop_path || clickedContent.poster_path,
                   "w500"
                 )})`,
               }}

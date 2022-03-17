@@ -25,13 +25,6 @@ const Wrapper = styled.div`
   background-color: ${(props) => props.theme.black.dark};
   overflow: hidden;
 `;
-// 로딩
-const Loader = styled.div`
-  height: 20vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
 
 /* 홈 배너 */
 const Banner = styled.div<{ bgphoto: string }>`
@@ -82,7 +75,7 @@ const SliderWrapper = styled.div`
   position: relative;
   top: -120px;
   @media (max-width: ${(props) => props.theme.size.tablet}) {
-    top: -50px;
+    top: -80px;
   }
   @media (max-width: ${(props) => props.theme.size.mobileL}) {
     top: 0;
