@@ -21,7 +21,7 @@ const Header = styled.header`
 const Logo = styled.svg`
   width: 140px;
   height: 40px;
-  fill: ${(props) => props.theme.red};
+  fill: ${(props) => props.theme.red.normal};
   cursor: pointer;
   /* 모바일 화면 */
   @media (max-width: ${(props) => props.theme.size.mobile}) {

@@ -42,6 +42,7 @@ const ErrorMsg = styled.span`
   display: block;
   font-size: 14px;
   color: ${(props) => props.theme.red.normal};
+  margin-bottom: 10px;
 `;
 interface ISign {
   email: string;
@@ -60,8 +61,19 @@ function AuthForm() {
     try {
       await authService.createUserWithEmailAndPassword(email, password);
     } catch (error: any) {
-      error?.customData._tokenResponse.error.errors[0].message ===
-        "EMAIL_EXISTS" && setError("이미 존재하는 계정입니다.");
+      console.log(error.code);
+      switch (error.code) {
+        case "auth/invalid-email":
+          return setError("이메일 형식으로 입력해주세요.");
+        case "auth/weak-password":
+          return setError("비밀번호가 너무 약합니다.(6자 이상)");
+        case "auth/email-already-in-use":
+          return setError("이미 존재하는 계정입니다.");
+        default:
+          break;
+      }
+      /* error?.customData._tokenResponse.error.errors[0].message ===
+        "EMAIL_EXISTS" && setError("이미 존재하는 계정입니다."); */
     }
   };
 
@@ -76,6 +88,7 @@ function AuthForm() {
               required: { value: true, message: "이메일을 입력해주세요." },
             })}
           />
+          <ErrorMsg>{errors.email?.message}</ErrorMsg>
           <PwInput
             placeholder="Password"
             type="password"
@@ -85,7 +98,6 @@ function AuthForm() {
           />
         </SignForm>
         {/* 폼 에러 처리 */}
-        <ErrorMsg>{errors.email?.message}</ErrorMsg>
         <ErrorMsg>{errors.password?.message}</ErrorMsg>
         <ErrorMsg>{error}</ErrorMsg>
 

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -37,7 +38,7 @@ const LoginBtn = styled.button`
 `;
 
 const ErrorMsg = styled.span`
-  color: #ccc;
+  color: ${(props) => props.theme.red.normal};
   font-size: 12px;
   margin-bottom: 10px;
 `;
@@ -47,6 +48,7 @@ interface ISign {
   password: string;
 }
 function LoginForm() {
+  const [error, setError] = useState("");
   const navigation = useNavigate();
   const {
     register,
@@ -54,12 +56,20 @@ function LoginForm() {
     formState: { errors },
   } = useForm<ISign>();
   const onValid = async (data: ISign) => {
-    await authService.signInWithEmailAndPassword(data.email, data.password);
-    navigation(`/`);
-    /* try {
-    } catch (error) {
-      console.log(error);
-    } */
+    try {
+      await authService.signInWithEmailAndPassword(data.email, data.password);
+      navigation(`/`);
+    } catch (error: any) {
+      switch (error.code) {
+        case "auth/user-not-found":
+          return setError("존재하지 않는 계정이거나 잘못된 이메일입니다.");
+        case "auth/wrong-password":
+          return setError("잘못된 비밀번호 입니다.");
+        default:
+          break;
+      }
+    }
+    /**/
   };
 
   return (
@@ -81,6 +91,7 @@ function LoginForm() {
           })}
         />
         <ErrorMsg>{errors.password?.message}</ErrorMsg>
+        <ErrorMsg>{error}</ErrorMsg>
       </Form>
 
       <LoginBtn type="submit" onClick={handleSubmit(onValid)}>
