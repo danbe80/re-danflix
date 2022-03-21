@@ -9,14 +9,23 @@ import Search from "./Search";
 import SignIn from "./SignIn";
 import Tv from "./Tv";
 
-interface ILog {
-  isLoggedIn: boolean;
+interface IUser {
+  displayName: string | null;
+  uid: string;
+  profilePhotoURL: string | null;
+  updataProfile: (args: any) => Promise<void>;
 }
 
-function AppRouter({ isLoggedIn }: ILog) {
+interface ILog {
+  isLoggedIn: boolean;
+  userObj: IUser | null | undefined;
+  refreshUser: () => void;
+}
+
+function AppRouter({ isLoggedIn, userObj, refreshUser }: ILog) {
   return (
     <Router>
-      {isLoggedIn ? <Header /> : <HeaderSign />}
+      {isLoggedIn ? <Header userObj={userObj} /> : <HeaderSign />}
       <Routes>
         {isLoggedIn ? (
           <>
@@ -29,7 +38,12 @@ function AppRouter({ isLoggedIn }: ILog) {
             <Route path="/tv" element={<Tv />}>
               <Route path=":tvId" element={<Tv />} />
             </Route>
-            <Route path="/profile" element={<Profile />} />
+            <Route
+              path="/profile"
+              element={
+                <Profile userObj={userObj} refreshUser={() => refreshUser} />
+              }
+            />
             <Route path="/search" element={<Search />} />
           </>
         ) : (

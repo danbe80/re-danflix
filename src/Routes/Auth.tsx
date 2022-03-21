@@ -110,7 +110,7 @@ const StartBtn = styled.button`
   width: 50%;
   margin: 0 auto;
   color: ${(props) => props.theme.white.lighter};
-  background-color: #c20811;
+  background-color: ${(props) => props.theme.red.darker};
   border: none;
   border-radius: 3px;
   font-size: 25px;
@@ -118,7 +118,7 @@ const StartBtn = styled.button`
   cursor: pointer;
   transition: background-color 0.3s;
   &:hover {
-    background-color: ${(props) => props.theme.red};
+    background-color: ${(props) => props.theme.red.normal};
   }
 `;
 

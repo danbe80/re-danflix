@@ -3,7 +3,10 @@ import 'styled-components';
 // and extend theme!
 declare module 'styled-components' {
 	export interface DefaultTheme {
-		red: string;
+		red: {
+			normal: string;
+			darker: string;
+		};
 		black: {
 			dark: string;
 			darker: string;

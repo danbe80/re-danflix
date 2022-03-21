@@ -169,9 +169,12 @@ const ProfileWrap = styled(motion.div)`
   position: relative;
   cursor: pointer;
 `;
-const ProfilePhoto = styled.div`
+const ProfilePhoto = styled.div<{ profile: string | null | undefined }>`
   width: 100%;
   height: 100%;
+  background-image: url(${(props) => props.profile});
+  background-size: cover;
+  border-radius: 5px;
 `;
 const Photo = styled.div``;
 
@@ -229,8 +232,16 @@ const proVariants = {
 interface IForm {
   keyword: string;
 }
-
-function Header() {
+interface IUser {
+  displayName: string | null;
+  uid: string;
+  profilePhotoURL: string | null;
+  updataProfile: (args: any) => Promise<void>;
+}
+interface IObj {
+  userObj: IUser | undefined | null;
+}
+function Header({ userObj }: IObj) {
   /* 검색 아이콘 오픈 */
   const [searchOpen, setSearchOpen] = useState(false);
 
@@ -367,7 +378,6 @@ function Header() {
           ) : null}
         </Wrap>
         <Wrap>
-          {/* <button >로그아웃</button> */}
           <Search onSubmit={handleSubmit(onValid)}>
             <SearchIcon
               onClick={toggleSearch}
@@ -410,7 +420,7 @@ function Header() {
                 onClick={onProfile}
                 whileHover="hover"
               >
-                <ProfilePhoto></ProfilePhoto>
+                <ProfilePhoto profile={userObj?.profilePhotoURL} />
               </ProfileWrap>
             </>
           )}

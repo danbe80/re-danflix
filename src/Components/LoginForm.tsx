@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { authService } from "../firebaseConfig";
 
@@ -46,15 +47,15 @@ interface ISign {
   password: string;
 }
 function LoginForm() {
+  const navigation = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<ISign>();
   const onValid = async (data: ISign) => {
-    console.log(data);
-
     await authService.signInWithEmailAndPassword(data.email, data.password);
+    navigation(`/`);
     /* try {
     } catch (error) {
       console.log(error);
