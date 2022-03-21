@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import { authService } from "../firebaseConfig";
@@ -37,12 +38,17 @@ const SignBtn = styled.button`
     background-color: ${(props) => props.theme.red};
   }
 `;
-const ErrorMsg = styled.span``;
+const ErrorMsg = styled.span`
+  display: block;
+  font-size: 14px;
+  color: ${(props) => props.theme.red.normal};
+`;
 interface ISign {
   email: string;
   password: string;
 }
 function AuthForm() {
+  const [error, setError] = useState("");
   const {
     register,
     handleSubmit,
@@ -50,9 +56,13 @@ function AuthForm() {
   } = useForm<ISign>();
   // 일반 회원가입
   const onValid = async (data: ISign) => {
-    console.log(data);
     const { email, password } = data;
-    await authService.createUserWithEmailAndPassword(email, password);
+    try {
+      await authService.createUserWithEmailAndPassword(email, password);
+    } catch (error: any) {
+      error?.customData._tokenResponse.error.errors[0].message ===
+        "EMAIL_EXISTS" && setError("이미 존재하는 계정입니다.");
+    }
   };
 
   return (
@@ -77,6 +87,7 @@ function AuthForm() {
         {/* 폼 에러 처리 */}
         <ErrorMsg>{errors.email?.message}</ErrorMsg>
         <ErrorMsg>{errors.password?.message}</ErrorMsg>
+        <ErrorMsg>{error}</ErrorMsg>
 
         <SignBtn type="submit" onClick={handleSubmit(onValid)}>
           회원가입 완료하기
