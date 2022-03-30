@@ -49,6 +49,7 @@ interface ISign {
 }
 function LoginForm() {
   const [error, setError] = useState("");
+  const [demo, setDemo] = useState({ email: "demo@danbe.com", pw: "12345678" });
   const navigation = useNavigate();
   const {
     register,
@@ -71,19 +72,21 @@ function LoginForm() {
     }
     /**/
   };
-
+  const onChange = () => {};
   return (
     <>
       <Form onSubmit={handleSubmit(onValid)}>
         <IdInput
+          value={demo.email}
           placeholder="Email"
           type="email"
           {...register("email", {
-            required: { value: true, message: "이메일을 입력해주세요." },
+            required: "이메일을 입력해주세요.",
           })}
         />
         <ErrorMsg>{errors.email?.message}</ErrorMsg>
         <PwInput
+          value={demo.pw}
           placeholder="password"
           type="password"
           {...register("password", {
