@@ -70,7 +70,6 @@ function LoginForm() {
           break;
       }
     }
-    /**/
   };
   const onChange = () => {};
   return (
