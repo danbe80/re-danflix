@@ -32,8 +32,11 @@ const LoginWrap = styled.div`
   border-radius: 3px;
   display: flex;
   flex-direction: column;
+  max-width: 500px;
+  width: 50%;
   @media (max-width: ${(props) => props.theme.size.tablet}) {
-    width: 300px;
+    max-width: 500px;
+    width: 100%;
     margin: 0 auto;
     padding: 30px;
   }
