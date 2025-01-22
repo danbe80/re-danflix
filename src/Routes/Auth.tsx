@@ -13,7 +13,7 @@ const Wrapper = styled.div`
 
 const FirstWrap = styled.div`
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: #ffffff;
 `;
 // Auth form
 const SingText = styled.div`
@@ -57,7 +57,7 @@ const GitHub = styled.button``;
 const MainWrap = styled.div`
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.3);
+  // background-color: rgba(0, 0, 0, 0.3);
 `;
 const Img = styled.img`
   width: 100%;

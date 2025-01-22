@@ -1,5 +1,5 @@
 import { createGlobalStyle } from "styled-components";
-/* @import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@300;400;500&display=swap'); */
+import JaroRegular from "../fonts/Jaro-Regular-VariableFont_opsz.woff";
 
 const GlobalStyle = createGlobalStyle`
 html, body, div, span, applet, object, iframe,
@@ -55,13 +55,21 @@ table {
 body {
   font-weight: 300;
   font-family: 'Gothic A1', sans-serif;
-  color: ${(props) => props.theme.white.darker};
+  color: ${(props) => props.theme.black.darker};
   line-height: 1.2;
-  background-color: #111111;
+  background-color: #ffffff;
 }
 a {
   text-decoration:none;
   color:inherit;
+}
+
+
+
+@font-face {
+  font-family: "Jaro";
+  src: local("Jaro"), url(${JaroRegular}) format('woff'); 
+  font-weight: normal;
 }
 `;
 
