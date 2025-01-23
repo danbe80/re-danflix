@@ -35,10 +35,10 @@ const Logo = styled.h1`
   color: #5EFF84;
   // -webkit-text-stroke: 3px #000000;
   text-shadow: -3px 0 #000, 0 3px #000, 3px 0 #000, 0 -3px #000;
-
-`
+  cursor: pointer;
+  `
 const LoginBtn = styled.button`
-  width: 120px;
+  width: 8vw;
   height: 45px;
   background-color: #5EFF84;
   border-radius: 15px;
@@ -49,9 +49,13 @@ const LoginBtn = styled.button`
   font-family: "Jaro", serif;
   border: 2px solid #A1A1A1;
   box-shadow: 0 4px 4px rgba(0,0,0,0.25);
+  transition-duration:0.2s;
 
   &:hover {
-    // text-decoration: underline;
+    background-color: #00A727;
+    color: ${(props) => props.theme.white.lighter};
+    box-shadow: inset 0 4px 4px rgba(0,0,0,0.25);
+    
   }
   @media (max-width: ${(props) => props.theme.size.mobile}) {
     font-size: 16px;
@@ -67,11 +71,17 @@ function HeaderSign() {
   };
   // 로고 클릭
   const onHome = () => {
-    navigation(`/`);
+    if(currentURL.pathname === "/") {
+      window.location.reload();
+    } else {
+      navigation(`/`);
+    }
+
+
   };
   return (
     <Header>
-      <Logo>
+      <Logo onClick={onHome}>
         DANVIEW
       </Logo>
       {/* <Logo
