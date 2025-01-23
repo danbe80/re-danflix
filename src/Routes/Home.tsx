@@ -385,7 +385,7 @@ function Home() {
       ) : (
         <>
           {/* 배너 */}
-          <Banner bgphoto={makeImagePath(day?.results[0].backdrop_path || "")}>
+          {/* <Banner bgphoto={makeImagePath(day?.results[0].backdrop_path || "")}>
             <Title>{day?.results[0].title}</Title>
             <Overview>
               {day
@@ -396,7 +396,7 @@ function Home() {
             </Overview>
           </Banner>
           <SliderWrapper>
-            {/* 첫번째 슬라이드 - 24시간 인기 작품 */}
+             첫번째 슬라이드 - 24시간 인기 작품
             <SliderWrap>
               <Slider>
                 <PrevBtn onClick={() => decraseIndex("day")}>
@@ -533,7 +533,7 @@ function Home() {
                 />
               </>
             ) : null}
-          </AnimatePresence>
+          </AnimatePresence> */}
         </>
       )}
     </Wrapper>

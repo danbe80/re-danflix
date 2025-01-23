@@ -391,161 +391,162 @@ function Movie() {
       {isLoading ? (
         <Loading />
       ) : (
-        <>
-          <Banner bgphoto={makeImagePath(now?.results[0].backdrop_path || "")}>
-            <GenreTitle>영화</GenreTitle>
-            <Title>{now?.results[0].title}</Title>
-            <Overview>
-              {/* 내용 설명이 긴 영화는 200자로 제한을 둠 */}
-              {now
-                ? now?.results[0].overview.length > 180
-                  ? now?.results[0].overview.slice(0, 180) + "..."
-                  : now?.results[0].overview
-                : null}
-            </Overview>
-          </Banner>
-          <SliderWrapper>
-            <SliderWrap>
-              <Slider>
-                <PrevBtn onClick={() => decraseIndex("now")}>
-                  <BsChevronCompactLeft />
-                </PrevBtn>
+        <></>
+        // <>
+        //   <Banner bgphoto={makeImagePath(now?.results[0].backdrop_path || "")}>
+        //     <GenreTitle>영화</GenreTitle>
+        //     <Title>{now?.results[0].title}</Title>
+        //     <Overview>
+        //       {/* 내용 설명이 긴 영화는 200자로 제한을 둠 */}
+        //       {now
+        //         ? now?.results[0].overview.length > 180
+        //           ? now?.results[0].overview.slice(0, 180) + "..."
+        //           : now?.results[0].overview
+        //         : null}
+        //     </Overview>
+        //   </Banner>
+        //   <SliderWrapper>
+        //     <SliderWrap>
+        //       <Slider>
+        //         <PrevBtn onClick={() => decraseIndex("now")}>
+        //           <BsChevronCompactLeft />
+        //         </PrevBtn>
 
-                <RowTitle
-                  whileHover="hover"
-                  animate="rest"
-                  initial="rest"
-                  onHoverStart={(prev) => setHover(!prev)}
-                  onHoverEnd={(prev) => setHover(!prev)}
-                >
-                  극장 최신 개봉작
-                  <MoreWrap>
-                    <MoreMovies variants={slashVariants}>모두 보기</MoreMovies>
-                    <motion.div variants={iconVariants} initial={{ x: -30 }}>
-                      <BsCaretRightFill />
-                    </motion.div>
-                  </MoreWrap>
-                </RowTitle>
-                <AnimatePresence
-                  initial={false}
-                  onExitComplete={toggleLeaving}
-                  custom={back}
-                >
-                  <Row
-                    variants={rowVariants}
-                    initial="hidden"
-                    animate="visible"
-                    exit="exit"
-                    transition={{ type: "tween", duration: 1 }}
-                    key={nIndex}
-                    custom={back}
-                  >
-                    {now?.results
-                      .slice(1)
-                      .slice(offset * nIndex, offset * nIndex + offset)
-                      .map((movie) => (
-                        <Box
-                          layoutId={movie.id + "n"}
-                          key={movie.id}
-                          variants={boxVariants}
-                          initial="normal"
-                          whileHover="hover"
-                          transition={{ type: "tween" }}
-                          bgphoto={makeImagePath(movie.poster_path, "w500")}
-                          onClick={() => onBoxClicked(movie.id + "n")}
-                        >
-                          <Info variants={infoVariants}>
-                            <h4>{movie.title}</h4>
-                          </Info>
-                        </Box>
-                      ))}
-                  </Row>
-                </AnimatePresence>
-                <NextBtn onClick={() => incraseIndex("now")}>
-                  <BsChevronCompactRight />
-                </NextBtn>
-              </Slider>
-              {/* 주 기준 인기 영화작품 */}
-              {/* 극장 개봉작 */}
-            </SliderWrap>
-            <SliderWrap>
-              <Slider>
-                <PrevBtn onClick={() => decraseIndex("top")}>
-                  <BsChevronCompactLeft />
-                </PrevBtn>
+        //         <RowTitle
+        //           whileHover="hover"
+        //           animate="rest"
+        //           initial="rest"
+        //           onHoverStart={(prev) => setHover(!prev)}
+        //           onHoverEnd={(prev) => setHover(!prev)}
+        //         >
+        //           극장 최신 개봉작
+        //           <MoreWrap>
+        //             <MoreMovies variants={slashVariants}>모두 보기</MoreMovies>
+        //             <motion.div variants={iconVariants} initial={{ x: -30 }}>
+        //               <BsCaretRightFill />
+        //             </motion.div>
+        //           </MoreWrap>
+        //         </RowTitle>
+        //         <AnimatePresence
+        //           initial={false}
+        //           onExitComplete={toggleLeaving}
+        //           custom={back}
+        //         >
+        //           <Row
+        //             variants={rowVariants}
+        //             initial="hidden"
+        //             animate="visible"
+        //             exit="exit"
+        //             transition={{ type: "tween", duration: 1 }}
+        //             key={nIndex}
+        //             custom={back}
+        //           >
+        //             {now?.results
+        //               .slice(1)
+        //               .slice(offset * nIndex, offset * nIndex + offset)
+        //               .map((movie) => (
+        //                 <Box
+        //                   layoutId={movie.id + "n"}
+        //                   key={movie.id}
+        //                   variants={boxVariants}
+        //                   initial="normal"
+        //                   whileHover="hover"
+        //                   transition={{ type: "tween" }}
+        //                   bgphoto={makeImagePath(movie.poster_path, "w500")}
+        //                   onClick={() => onBoxClicked(movie.id + "n")}
+        //                 >
+        //                   <Info variants={infoVariants}>
+        //                     <h4>{movie.title}</h4>
+        //                   </Info>
+        //                 </Box>
+        //               ))}
+        //           </Row>
+        //         </AnimatePresence>
+        //         <NextBtn onClick={() => incraseIndex("now")}>
+        //           <BsChevronCompactRight />
+        //         </NextBtn>
+        //       </Slider>
+        //       {/* 주 기준 인기 영화작품 */}
+        //       {/* 극장 개봉작 */}
+        //     </SliderWrap>
+        //     <SliderWrap>
+        //       <Slider>
+        //         <PrevBtn onClick={() => decraseIndex("top")}>
+        //           <BsChevronCompactLeft />
+        //         </PrevBtn>
 
-                <RowTitle
-                  whileHover="hover"
-                  animate="rest"
-                  initial="rest"
-                  onHoverStart={(prev) => setHover(!prev)}
-                  onHoverEnd={(prev) => setHover(!prev)}
-                >
-                  평점 높은 순위
-                  <MoreWrap>
-                    <MoreMovies variants={slashVariants}>모두 보기</MoreMovies>
-                    <motion.div variants={iconVariants} initial={{ x: -30 }}>
-                      <BsCaretRightFill />
-                    </motion.div>
-                  </MoreWrap>
-                </RowTitle>
-                <AnimatePresence
-                  initial={false}
-                  onExitComplete={toggleLeaving}
-                  custom={back}
-                >
-                  <Row
-                    variants={rowVariants}
-                    initial="hidden"
-                    animate="visible"
-                    exit="exit"
-                    transition={{ type: "tween", duration: 1 }}
-                    key={rIndex}
-                    custom={back}
-                  >
-                    {mtop?.results
-                      .slice(1)
-                      .slice(offset * rIndex, offset * rIndex + offset)
-                      .map((movie) => (
-                        <Box
-                          layoutId={movie.id + "r"}
-                          key={movie.id}
-                          variants={boxVariants}
-                          initial="normal"
-                          whileHover="hover"
-                          transition={{ type: "tween" }}
-                          bgphoto={makeImagePath(movie.poster_path, "w500")}
-                          onClick={() => onBoxClicked(movie.id + "r")}
-                        >
-                          <Info variants={infoVariants}>
-                            <h4>{movie.title}</h4>
-                          </Info>
-                        </Box>
-                      ))}
-                  </Row>
-                </AnimatePresence>
-                <NextBtn onClick={() => incraseIndex("top")}>
-                  <BsChevronCompactRight />
-                </NextBtn>
-              </Slider>
-              {/* 주 기준 인기 영화작품 */}
-              {/* 극장 개봉작 */}
-            </SliderWrap>
-          </SliderWrapper>
-          {/* 영화 정보 보기 화면 */}
-          <AnimatePresence>
-            {movieId ? (
-              <>
-                <DetailBox
-                  contentId={movieId}
-                  clickedContent={clickedMovie}
-                  genObj={genObj}
-                  content={content}
-                />
-              </>
-            ) : null}
-          </AnimatePresence>
-        </>
+        //         <RowTitle
+        //           whileHover="hover"
+        //           animate="rest"
+        //           initial="rest"
+        //           onHoverStart={(prev) => setHover(!prev)}
+        //           onHoverEnd={(prev) => setHover(!prev)}
+        //         >
+        //           평점 높은 순위
+        //           <MoreWrap>
+        //             <MoreMovies variants={slashVariants}>모두 보기</MoreMovies>
+        //             <motion.div variants={iconVariants} initial={{ x: -30 }}>
+        //               <BsCaretRightFill />
+        //             </motion.div>
+        //           </MoreWrap>
+        //         </RowTitle>
+        //         <AnimatePresence
+        //           initial={false}
+        //           onExitComplete={toggleLeaving}
+        //           custom={back}
+        //         >
+        //           <Row
+        //             variants={rowVariants}
+        //             initial="hidden"
+        //             animate="visible"
+        //             exit="exit"
+        //             transition={{ type: "tween", duration: 1 }}
+        //             key={rIndex}
+        //             custom={back}
+        //           >
+        //             {mtop?.results
+        //               .slice(1)
+        //               .slice(offset * rIndex, offset * rIndex + offset)
+        //               .map((movie) => (
+        //                 <Box
+        //                   layoutId={movie.id + "r"}
+        //                   key={movie.id}
+        //                   variants={boxVariants}
+        //                   initial="normal"
+        //                   whileHover="hover"
+        //                   transition={{ type: "tween" }}
+        //                   bgphoto={makeImagePath(movie.poster_path, "w500")}
+        //                   onClick={() => onBoxClicked(movie.id + "r")}
+        //                 >
+        //                   <Info variants={infoVariants}>
+        //                     <h4>{movie.title}</h4>
+        //                   </Info>
+        //                 </Box>
+        //               ))}
+        //           </Row>
+        //         </AnimatePresence>
+        //         <NextBtn onClick={() => incraseIndex("top")}>
+        //           <BsChevronCompactRight />
+        //         </NextBtn>
+        //       </Slider>
+        //       {/* 주 기준 인기 영화작품 */}
+        //       {/* 극장 개봉작 */}
+        //     </SliderWrap>
+        //   </SliderWrapper>
+        //   {/* 영화 정보 보기 화면 */}
+        //   <AnimatePresence>
+        //     {movieId ? (
+        //       <>
+        //         <DetailBox
+        //           contentId={movieId}
+        //           clickedContent={clickedMovie}
+        //           genObj={genObj}
+        //           content={content}
+        //         />
+        //       </>
+        //     ) : null}
+        //   </AnimatePresence>
+        // </>
       )}
     </Wrapper>
   );

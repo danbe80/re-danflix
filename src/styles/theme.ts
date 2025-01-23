@@ -20,5 +20,11 @@ export const theme:DefaultTheme = {
     mobileL: '426px',
     tablet: '769px',
 			desktop: '1025px',
-  }
+  },
+  // 공통 버튼 
+  commonBtn : {
+    stroke: '#A1A1A1',
+    fill: '#5EFF84',
+    hoverFill : '#00A727'
+  },
 }

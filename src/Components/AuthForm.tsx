@@ -7,6 +7,8 @@ const SignWrap = styled.div`
   width: 300px;
   margin: auto;
 `;
+
+
 const SignForm = styled.form`
   display: flex;
   flex-direction: column;
@@ -80,7 +82,7 @@ function AuthForm() {
   return (
     <>
       <SignWrap>
-        <SignForm onSubmit={handleSubmit(onValid)}>
+        {/* <SignForm onSubmit={handleSubmit(onValid)}>
           <EmailInput
             placeholder="Email"
             type="email"
@@ -96,14 +98,13 @@ function AuthForm() {
               required: "패스워드를 입력해주세요(6자 이상)",
             })}
           />
-        </SignForm>
+        </SignForm> */}
         {/* 폼 에러 처리 */}
         <ErrorMsg>{errors.password?.message}</ErrorMsg>
         <ErrorMsg>{error}</ErrorMsg>
-
-        <SignBtn type="submit" onClick={handleSubmit(onValid)}>
+        {/* <SignBtn type="submit" onClick={handleSubmit(onValid)}>
           회원가입 완료하기
-        </SignBtn>
+        </SignBtn> */}
       </SignWrap>
     </>
   );

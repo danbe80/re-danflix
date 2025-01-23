@@ -4,36 +4,39 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { authService } from "../firebaseConfig";
 
-const Form = styled.form`
+const LoginFormWrap = styled.form`
+  width: 100%;
   display: flex;
   flex-direction: column;
-  padding: 25px 0 0 0;
-  input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    background-color: rgba(255, 255, 255, 0.8);
+`;
+const LoginInput = styled.input`
+  width: 80%;
+  padding: 12px 10px;
+  margin: 0 auto 10px auto;
+  background-color: #D9D9D9;
+  border: none;
+  border-radius: 10px;
+  &:focus {
+    outline: 1px solid #3498db;
     border: none;
-    border-radius: 3px;
-    &:focus {
-      outline: 1px solid #3498db;
-      border: none;
-    }
   }
 `;
-const IdInput = styled.input``;
-const PwInput = styled.input``;
 const LoginBtn = styled.button`
-  background-color: #c20811;
-  color: ${(props) => props.theme.white.lighter};
-  font-size: 18px;
-  border: none;
-  border-radius: 3px;
-  margin: 10px 0 20px 0;
-  padding: 10px 0;
-  width: 100%;
+  height: 35px;
+  background-color: #5EFF84;
+  color: ${(props) => props.theme.black.dark};
+  font-size: 22px;
+  border: 1px solid #A1A1A1;
+  border-radius: 10px;
+  margin: 0 auto 20px auto;
+  width: 80%;
+  font-family: 'Jaro';
+  box-shadow: 0 4px 4px rgba(0,0,0,0.25);
+  transition-duration:0.2s;
   &:hover {
-    background-color: ${(props) => props.theme.red};
+    background-color: #00A727;
+    color: ${(props) => props.theme.white.lighter};
+    box-shadow: inset 0 4px 4px rgba(0,0,0,0.25);
   }
 `;
 
@@ -49,7 +52,7 @@ interface ISign {
 }
 function LoginForm() {
   const [error, setError] = useState("");
-  const [demo, setDemo] = useState({ email: "demo@danbe.com", pw: "12345678" });
+  const [demo, setDemo] = useState({ email: "", pw: "12345678" });
   const navigation = useNavigate();
   const {
     register,
@@ -74,8 +77,8 @@ function LoginForm() {
   const onChange = () => {};
   return (
     <>
-      <Form onSubmit={handleSubmit(onValid)}>
-        <IdInput
+      <LoginFormWrap onSubmit={handleSubmit(onValid)}>
+        <LoginInput
           value={demo.email}
           placeholder="Email"
           type="email"
@@ -83,8 +86,8 @@ function LoginForm() {
             required: "이메일을 입력해주세요.",
           })}
         />
-        <ErrorMsg>{errors.email?.message}</ErrorMsg>
-        <PwInput
+        {/* <ErrorMsg>{errors.email?.message}</ErrorMsg> */}
+        <LoginInput
           value={demo.pw}
           placeholder="password"
           type="password"
@@ -92,12 +95,12 @@ function LoginForm() {
             required: "패스워드를 입력해주세요(6자 이상)",
           })}
         />
-        <ErrorMsg>{errors.password?.message}</ErrorMsg>
-        <ErrorMsg>{error}</ErrorMsg>
-      </Form>
+        {/* <ErrorMsg>{errors.password?.message}</ErrorMsg> */}
+        {/* <ErrorMsg>{error}</ErrorMsg> */}
+      </LoginFormWrap>
 
       <LoginBtn type="submit" onClick={handleSubmit(onValid)}>
-        로그인
+        Login
       </LoginBtn>
     </>
   );

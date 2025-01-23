@@ -23,5 +23,11 @@ declare module 'styled-components' {
 			tablet: string;
 			desktop: string;
 		};
+
+		commonBtn : {
+			stroke: string;
+			fill: string;
+			hoverFill: string;
+		}
 	}
 }
