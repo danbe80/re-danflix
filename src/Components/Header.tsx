@@ -31,7 +31,6 @@ const Headeer = styled.header`
   justify-content: space-between;
   align-items: center;
   padding: 0 20px;
-  // background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0));
   /* 모바일 화면 */
   @media (max-width: ${(props) => props.theme.size.mobile}) {
     padding: 0 20px;
@@ -41,9 +40,9 @@ const Headeer = styled.header`
 `
 // 홈페이지 로고
 const Logo = styled.h1`
-  font-family: "Jaro", serif;
+  font-family: ${(props) => props.theme.logo.family}, serif;
   font-size: 2rem;
-  color: #5EFF84;
+  color: ${(props) => props.theme.logo.color};
   // -webkit-text-stroke: 3px #000000;
   text-shadow: -3px 0 #000, 0 3px #000, 3px 0 #000, 0 -3px #000;
   cursor: pointer;
@@ -51,30 +50,50 @@ const Logo = styled.h1`
 // ************************** //
 
 // *** 로그인 전 헤더 (로그인 버튼) *** //
-
 const LoginBtn = styled.button`
   width: 4vw;
   height: 35px;
-  background-color: #5EFF84;
+  background-color: ${(props) => props.theme.commonBtn.fill};
   border-radius: 15px;
   text-align: center;
   align-content: center;
   color: ${(props) => props.theme.black.dark};
   font-size: 18px;
   font-family: "Jaro", serif;
-  border: 2px solid #A1A1A1;
-  box-shadow: 0 4px 4px rgba(0,0,0,0.25);
+  border: 2px solid ${(props) => props.theme.commonBtn.stroke};
+  box-shadow: 0 4px 4px ${(props) => props.theme.commonBtn.shadow};
   transition-duration:0.2s;
 
   &:hover {
-    background-color: #00A727;
+    background-color: ${(props) => props.theme.commonBtn.hoverFill};
     color: ${(props) => props.theme.white.lighter};
-    box-shadow: inset 0 4px 4px rgba(0,0,0,0.25);
+    box-shadow: inset 0 4px 4px ${(props) => props.theme.commonBtn.shadow};
   }
-  @media (max-width: ${(props) => props.theme.size.mobile}) {
+
+  @media (max-width: ${(props) => props.theme.size.labtopL})
+  and (min-width: ${(props) => props.theme.size.labtop}) {
+    width: 6vw;
+  }
+
+  @media (max-width: ${(props) => props.theme.size.labtop}) 
+  and (min-width: ${(props) => props.theme.size.tabletL}){
+    width: 8vw;
+  }
+
+  @media (max-width: ${(props) => props.theme.size.tabletL}) 
+  and (min-width: ${(props) => props.theme.size.mobileL}){
     width: 10vw;
+  }
+
+  @media (max-width: ${(props) => props.theme.size.mobileL}) {
+    width: 20vw;
+  }
+
+  @media (max-width: ${(props) => props.theme.size.mobile}) {
     font-size: 16px;
   }
+
+
 `;
 
 // ************************** //
@@ -102,7 +121,6 @@ const Wrap = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
-  /* position: relative; */
 `;
 
 const SearchAndProfileWrap = styled.div`
@@ -112,25 +130,6 @@ const SearchAndProfileWrap = styled.div`
   align-items: center;
 
 `
-
-// const Logo = styled.svg`
-//   margin-right: 30px;
-//   width: 120px;
-//   height: 40px;
-//   fill: ${(props) => props.theme.red};
-//   cursor: pointer;
-//   path {
-//     stroke: white;
-//     stroke-width: 2;
-//   }
-//   @media (max-width: ${(props) => props.theme.size.tablet}) {
-//     width: 100px;
-//     margin-right: 20px;
-//   }
-//   @media (max-width: ${(props) => props.theme.size.mobileL}) {
-//     width: 80px;
-//   }
-// `;
 
 const Items = styled.ul`
   width: 80%;

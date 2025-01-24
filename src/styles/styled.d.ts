@@ -16,11 +16,21 @@ declare module 'styled-components' {
 			darker: string;
 			lighter: string;
 		};
+
+		// LOGO
+		logo: {
+			color: string;
+			family: string;
+		}
+
 		// responsive
 		size:{
 			mobile: string;
 			mobileL: string;
 			tablet: string;
+			tabletL: string;
+			labtop: string;
+			labtopL: string;
 			desktop: string;
 		};
 
@@ -28,6 +38,7 @@ declare module 'styled-components' {
 			stroke: string;
 			fill: string;
 			hoverFill: string;
+			shadow: string;
 		}
 	}
 }
