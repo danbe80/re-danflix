@@ -25,6 +25,9 @@ const LoginWrap = styled.div`
     max-width: 500px;
     width: 100%;
     margin: 0 auto;
+  }
+
+  @media (max-width: ${(props) => props.theme.size.mobileL}) {
     padding: 30px;
   }
 `;
