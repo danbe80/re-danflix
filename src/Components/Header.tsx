@@ -43,7 +43,6 @@ const Logo = styled.h1`
   font-family: ${(props) => props.theme.logo.family}, serif;
   font-size: 2rem;
   color: ${(props) => props.theme.logo.color};
-  // -webkit-text-stroke: 3px #000000;
   text-shadow: -3px 0 #000, 0 3px #000, 3px 0 #000, 0 -3px #000;
   cursor: pointer;
   `
@@ -59,7 +58,7 @@ const LoginBtn = styled.button`
   align-content: center;
   color: ${(props) => props.theme.black.dark};
   font-size: 18px;
-  font-family: "Jaro", serif;
+  font-family: ${(props) => props.theme.logo.family}, serif;
   border: 2px solid ${(props) => props.theme.commonBtn.stroke};
   box-shadow: 0 4px 4px ${(props) => props.theme.commonBtn.shadow};
   transition-duration:0.2s;
@@ -70,6 +69,7 @@ const LoginBtn = styled.button`
     box-shadow: inset 0 4px 4px ${(props) => props.theme.commonBtn.shadow};
   }
 
+  /* 반응형 적용 */
   @media (max-width: ${(props) => props.theme.size.labtopL})
   and (min-width: ${(props) => props.theme.size.labtop}) {
     width: 6vw;

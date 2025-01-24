@@ -3,7 +3,6 @@ import Auth from "../Routes/Auth";
 import Home from "../Routes/Home";
 import Profile from "../Routes/Profile";
 import Header from "./Header";
-import HeaderSign from "./Header/HeaderSign";
 import Movie from "./Movie";
 import Search from "./Search";
 import SignIn from "./SignIn";

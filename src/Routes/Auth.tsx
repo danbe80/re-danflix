@@ -69,8 +69,7 @@ const LogoText = styled.span`
 
 // 회원가입 버튼 wrap
 const SignBtnWrap = styled.div`
-  width: 400px;
-  height: 20vh;
+  width: 400px; 
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -91,7 +90,7 @@ const SignBtnWrap = styled.div`
 // 소셜 로그인 버튼 wrap
 const SocialBtnWrap = styled.div`
   width: 100%;
-  margin-top: 25px;
+  margin-top: 55px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -137,6 +136,14 @@ const ContextWrap = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+
+  @media (max-width: ${(props) => props.theme.size.mobileL}) 
+  and (min-width: ${(props) => props.theme.size.mobile}){
+    width: 350px;
+  }
+  @media (max-width: ${(props) => props.theme.size.mobile}) {
+    width: 290px;
+  }
 `;
 const Title = styled.h2`
   font-size: 48px;
@@ -163,7 +170,7 @@ const Content = styled.p`
 `;
 
 const AuthWrap = styled.div`
-  margin-top: 17vh;
+  margin-top: 16vh;
   text-align: center;
 `;
 const AuthNotionText = styled.p`
