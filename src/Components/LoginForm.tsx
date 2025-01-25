@@ -52,7 +52,7 @@ interface ISign {
 }
 function LoginForm() {
   const [error, setError] = useState("");
-  const [demo, setDemo] = useState({ email: "", pw: "12345678" });
+  const [demo, setDemo] = useState({ email: "demo@demo.com", pw: "12345678" });
   const navigation = useNavigate();
   const {
     register,
@@ -74,7 +74,6 @@ function LoginForm() {
       }
     }
   };
-  const onChange = () => {};
   return (
     <>
       <LoginFormWrap onSubmit={handleSubmit(onValid)}>
