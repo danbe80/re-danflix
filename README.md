@@ -2,6 +2,8 @@
 
 **_ 이 사이트는 넷플릭스 클론 코딩 입니다 _**
 
+[피그마](https://www.figma.com/design/BNO7IOHSdlcAvdbT9e0clS/DANVIEW?node-id=6-7&t=T4zkbwK50yzRxYU5-1)
+
 ---
 
 ## Skills
